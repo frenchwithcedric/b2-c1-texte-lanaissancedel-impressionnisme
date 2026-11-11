@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Charivari - 25 Avril 1874</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Styles pour simuler l'effet papier journal 1870 */
+        body {
+            background-color: #e8e2d3;
+            color: #1c1917;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background-image: radial-gradient(#d6cbba 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .newspaper-paper {
+            background: #f4efe3;
+            box-shadow: 0 0 25px rgba(0,0,0,0.15), inset 0 0 80px rgba(160,130,90,0.12);
+            border: 1px solid #d3c7b2;
+        }
+
+        .font-gothic {
+            font-family: 'UnifrakturMaguntia', 'Playfair Display', serif;
+        }
+
+        .font-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .font-editorial {
+            font-family: 'IM Fell English', Georgia, serif;
+        }
+
+        /* Colonnes de journal d'époque */
+        .newspaper-columns {
+            column-count: 1;
+            column-gap: 2rem;
+            column-rule: 1px solid #c8bda8;
+        }
+
+        @media (min-width: 768px) {
+            .newspaper-columns {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .newspaper-columns {
+                column-count: 3;
+            }
+        }
+
+        /* Lettrine */
+        .dropcap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            float: left;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-bottom: 2px;
+            font-weight: 900;
+            color: #000;
+        }
+
+        /* Style des mots cliquables avec popup */
+        .vocab-term {
+            background-color: rgba(184, 134, 11, 0.15);
+            border-bottom: 2px dashed #8b5a2b;
+            color: #5c2c06;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0 2px;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .vocab-term:hover {
+            background-color: #8b5a2b;
+            color: #ffffff;
+            border-bottom-style: solid;
+        }
+
+        .vocab-term i {
+            font-size: 0.7em;
+            margin-left: 2px;
+            vertical-align: super;
+            opacity: 0.7;
+        }
+
+        /* Sepia gravure style filter */
+        .engraving-effect {
+            filter: sepia(30%) contrast(115%) brightness(95%);
+            border: 2px solid #332d27;
+            padding: 4px;
+            background: #e6dfd1;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e8e2d3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a3957d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7a6b54;
+        }
+    </style>
+</head>
+<body class="py-6 px-2 sm:px-4 md:px-8 min-h-screen">
+
+    <!-- En-tête fixe d'aide et de navigation -->
+    <header class="max-w-6xl mx-auto mb-4 bg-amber-950 text-amber-100 p-3 rounded-lg shadow-md flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-newspaper text-amber-400 text-lg"></i>
+            <span class="font-bold uppercase tracking-wider">Édition Historique Interactive (25 Avril 1874)</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="hidden md:inline text-amber-200"><i class="fa-solid fa-hand-pointer mr-1 text-amber-400"></i> Cliquez sur les termes soulignés pour le glossaire du XIXᵉ s.</span>
+            <button onclick="toggleGlossaryModal()" class="bg-amber-800 hover:bg-amber-700 text-amber-100 px-3 py-1 rounded border border-amber-600 transition flex items-center gap-1">
+                <i class="fa-solid fa-book"></i> Index des 31 termes
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteneur principal du journal -->
+    <main class="newspaper-paper max-w-6xl mx-auto p-4 sm:p-8 md:p-12 relative text-stone-900 leading-relaxed text-justify">
+        
+        <!-- Haut du Journal (En-tête 1850-1870) -->
+        <div class="border-b-4 border-double border-stone-800 pb-6 mb-6">
+            <!-- Méta du journal -->
+            <div class="flex flex-wrap justify-between items-center text-xs sm:text-sm uppercase tracking-widest font-semibold border-b border-stone-800 pb-2 mb-4 gap-2">
+                <div>42<sup>e</sup> Année — N° 115</div>
+                <div class="text-center font-bold">Prix : 15 Centimes</div>
+                <div>Samedi 25 Avril 1874</div>
+            </div>
+
+            <!-- Titre du Journal -->
+            <div class="text-center my-4">
+                <h1 class="font-gothic text-5xl sm:text-7xl md:text-8xl tracking-normal text-stone-900 leading-none select-none">
+                    LE CHARIVARI
+                </h1>
+                <p class="font-editorial italic text-base sm:text-lg text-stone-7xl mt-2 tracking-wide">
+                    Journal illustré paraissant tous les jours — Politique, Littérature, Théâtre et Satire
+                </p>
+            </div>
+
+            <div class="border-t-2 border-b-2 border-stone-900 py-1 my-3 flex justify-between items-center text-xs uppercase font-bold tracking-widest px-2">
+                <span>Rédacteur en chef : Pierre Véron</span>
+                <span class="hidden sm:inline">Bureaux : 16, rue de Croissant, Paris</span>
+                <span>Feuilleton du Samedi</span>
+            </div>
+        </div>
+
+        <!-- Titre Principal de l'Article -->
+        <div class="text-center my-8 max-w-4xl mx-auto">
+            <span class="text-xs font-bold uppercase tracking-widest text-stone-600 block mb-1">— COMPTE RENDU EXPOSITION UNIVERSELLE DE LA PEINTURE —</span>
+            <h2 class="font-headline text-3xl sm:text-5xl font-black text-stone-900 uppercase tracking-tight leading-tight mb-3">
+                L'EXPOSITION DES IMPRESSIONNISTES
+            </h2>
+            <div class="font-editorial italic text-lg sm:text-xl text-stone-750 mb-4">
+                Par Louis Leroy
+            </div>
+            <div class="w-32 h-1 bg-stone-900 mx-auto mb-6"></div>
+        </div>
+
+        <!-- Section Image du Tableau de Monet -->
+        <figure class="my-8 max-w-3xl mx-auto engraving-effect bg-amber-50/50 p-3 sm:p-4 shadow-lg">
+            <div class="relative group cursor-pointer overflow-hidden rounded" onclick="openImageModal()">
+                <img id="monet-img" 
+                     src="https://upload.wikimedia.org/wikipedia/commons/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg" 
+                     alt="Impression, soleil levant par Claude Monet (1872)" 
+                     class="w-full h-auto object-cover max-h-[500px] transition-transform duration-500 group-hover:scale-105"
+                     onerror="this.onerror=null; this.src='https://placehold.co/800x500/d6cbba/332d27?text=Claude+Monet+-+Impression,+soleil+levant';">
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold gap-2 text-sm">
+                    <i class="fa-solid fa-magnifying-glass-plus text-xl"></i> Cliquer pour agrandir le chef-d'œuvre
+                </div>
+            </div>
+            <figcaption class="mt-3 text-center text-xs sm:text-sm font-editorial italic text-stone-800 border-t border-stone-400 pt-2">
+                <strong>Figure 1.</strong> — <em>« Impression, soleil levant »</em> (1872), toile de M. Claude Monet. 
+                <span class="block text-xs mt-1 text-stone-600 font-sans not-italic">Huile sur toile, 48 × 63 cm — Exposée dans les ateliers du photographe Nadar, 35 <span class="vocab-term" onclick="openVocab('boulevard')">boulevard<i class="fa-solid fa-circle-info"></i></span> des Capucines.</span>
+            </figcaption>
+        </figure>
+
+        <!-- Corps du texte en colonnes d'époque -->
+        <article class="newspaper-columns text-sm sm:text-base leading-relaxed text-stone-900 font-serif">
+            
+            <p class="dropcap mb-4">
+                Oh, ce fut un coup de foudre, et c’est le père Joseph Vincent qui l’attrapa.
+            </p>
+
+            <p class="mb-4">
+                Joseph Vincent est un paysagiste renommé, élève de Bertin, médaillé et décoré sous plusieurs gouvernements. Aussi n’était-ce pas sans un certain effroi que je l’avais amené à l’exposition impressionniste du boulevard des Capucines. Je voulais lui faire ingérer des fortes doses d’art moderne sans secousses trop violentes : le brave homme est si naïf !
+            </p>
+
+            <p class="mb-4">
+                En entrant dans la première salle, il tomba en arrêt devant la <em>Danseuse</em> de M. Renoir.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Quel dommage, me dit-il, qu’un peintre qui a un certain sentiment de la couleur ne dessine pas mieux ; les jambes de sa danseuse sont aussi cotonneuses que les gazes de ses jupons !
+            </p>
+
+            <p class="mb-4">
+                — Je trouve que vous êtes dur pour lui, répondis-je ; au contraire, le dessin est très serré…
+            </p>
+
+            <p class="mb-4">
+                Le grand paysagiste croyait rire.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Mais, mon cher ami, allez donc dire cela à Michallon !
+            </p>
+
+            <p class="mb-4">
+                Puis, s’arrêtant devant un paysage de M. Pissarro :
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Cré nom d’un chien ! s’écria-t-il, voilà qui est <span class="vocab-term" onclick="openVocab('labouré')">labouré<i class="fa-solid fa-circle-info"></i></span> de main de maître !
+            </p>
+
+            <p class="mb-4">
+                Je m'approchai. Le tableau représentait une plaine gelée par le grand froid, et au fond des arbres déplumés.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Comment !... ces traits d’ombre sur la neige, c’est du travail ? Mais ce sont des gelées de palette grattées régulièrement sur une toile égale ! <span class="vocab-term" onclick="openVocab('Ça n\'a ni queue ni tête')">Ça n'a ni queue ni tête<i class="fa-solid fa-circle-info"></i></span>, ni haut ni bas, ni devant ni derrière !
+            </p>
+
+            <p class="mb-4">
+                — C’est peut-être cela… Mais l’impression y est !
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Eh bien, elle est drôle, votre impression ! Et ceci ?
+            </p>
+
+            <p class="mb-4">
+                — <em>Une gelée blanche</em>, par M. Pissarro.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Ça, de la gelée blanche ? Mais ce sont des <span class="vocab-term" onclick="openVocab('grattures de palette')">grattures de palette<i class="fa-solid fa-circle-info"></i></span> posées uniformément sur une toile sale. Cela n'a ni queue ni tête, ni haut ni bas, ni devant ni derrière.
+            </p>
+
+            <p class="mb-4">
+                — Peut-être... Mais le sentiment impressionniste y est.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Vous êtes un <span class="vocab-term" onclick="openVocab('gai')">gai<i class="fa-solid fa-circle-info"></i></span> plaisant !... Tiens, voici un verger par le même peintre. Quel dessin effroyable ! Les arbres sont tors comme des tire-bouchons, et la terre ressemble à un pain d’épices qui aurait voyagé dans la poche d’un collégien.
+            </p>
+
+            <p class="mb-4">
+                Malheureusement, j’eus l’<span class="vocab-term" onclick="openVocab('imprudence')">imprudence<i class="fa-solid fa-circle-info"></i></span> de le laisser trop longtemps devant le <em>Boulevard des Capucines</em> de M. Monet.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Ah ! ah ! <span class="vocab-term" onclick="openVocab('ricana')">ricana<i class="fa-solid fa-circle-info"></i></span>-t-il à la Méphisto, est-il assez réussi, celui-là ! En voilà de l’impression, ou je ne m’y connais pas… Mais veuillez me dire ce que représentent ces innombrables <span class="vocab-term" onclick="openVocab('lichettes')">lichettes<i class="fa-solid fa-circle-info"></i></span> noires dans le bas du tableau ?
+            </p>
+
+            <p class="mb-4">
+                — Mais, répondis-je, ce sont des promeneurs !
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Alors, je ressemble à ça quand je me promène sur le boulevard des Capucines ? <span class="vocab-term" onclick="openVocab('sang et tonnerre')">Sang et tonnerre<i class="fa-solid fa-circle-info"></i></span> ! Vous moquez-vous de moi à la fin ?... Et ces <span class="vocab-term" onclick="openVocab('sillons')">sillons<i class="fa-solid fa-circle-info"></i></span> de peinture ? Ce <span class="vocab-term" onclick="openVocab('badigeonnage')">badigeonnage<i class="fa-solid fa-circle-info"></i></span> de <span class="vocab-term" onclick="openVocab('granit')">granit<i class="fa-solid fa-circle-info"></i></span> ? C'est de l'art, cela ? C'est de la peinture ?
+            </p>
+
+            <p class="mb-4">
+                — Notez, répondis-je, qu’il y a là une recherche d’atmosphère fort remarquable !
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Parlez-moi plutôt de l’exposition de M. Guillaumin. Ses paysages sont un travail <span class="vocab-term" onclick="openVocab('inouï')">inouï<i class="fa-solid fa-circle-info"></i></span> !
+            </p>
+
+            <p class="mb-4">
+                Le pauvre homme <span class="vocab-term" onclick="openVocab('déraisonnait')">déraisonnait<i class="fa-solid fa-circle-info"></i></span> complètement. Il s'arrêta devant le tableau de M. Cézanne représentant <em>La Maison du Pendu</em>.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Ô ciel ! s’écria-t-il, quelle horreur <span class="vocab-term" onclick="openVocab('effroyable')">effroyable<i class="fa-solid fa-circle-info"></i></span> ! Ce tableau <span class="vocab-term" onclick="openVocab('commet')">commet<i class="fa-solid fa-circle-info"></i></span> un crime contre la peinture classique. Ces <span class="vocab-term" onclick="openVocab('empâtements')">empâtements<i class="fa-solid fa-circle-info"></i></span> grossiers, ces <span class="vocab-term" onclick="openVocab('frottis')">frottis<i class="fa-solid fa-circle-info"></i></span> informes, ces <span class="vocab-term" onclick="openVocab('éclaboussures')">éclaboussures<i class="fa-solid fa-circle-info"></i></span> d’un rouge <span class="vocab-term" onclick="openVocab('écarlate')">écarlate<i class="fa-solid fa-circle-info"></i></span> ! Mon esprit s'en trouve tout à fait <span class="vocab-term" onclick="openVocab('troublés')">troublé<i class="fa-solid fa-circle-info"></i></span> !
+            </p>
+
+            <p class="mb-4">
+                Le vieux peintre <span class="vocab-term" onclick="openVocab('s\'est cabré')">s'est cabré<i class="fa-solid fa-circle-info"></i></span> comme un cheval devant un obstacle. Il se sentait <span class="vocab-term" onclick="openVocab('contraint')">contraint<i class="fa-solid fa-circle-info"></i></span> d'admettre la fin de ses convictions d'autrefois. La vue de ces toiles causait dans son cerveau une grave <span class="vocab-term" onclick="openVocab('avarie')">avarie<i class="fa-solid fa-circle-info"></i></span>.
+            </p>
+
+            <p class="mb-4">
+                Il était réservé à Monsieur Monet de lui donner le dernier coup.
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — Ah, le voilà, le voilà ! s’écria-t-il devant le numéro 98. Je le reconnais, le favori du père Vincent ! Que représente cette toile ? Voyez au livret.
+            </p>
+
+            <p class="mb-4 font-bold tracking-wide">
+                — <em>Impression, soleil levant.</em>
+            </p>
+
+            <p class="italic border-l-2 border-stone-700 pl-3 my-3 font-editorial">
+                — <em>Impression</em>, j’en étais sûr. Je me disais aussi, puisque je suis impressionné, il doit y avoir de l’impression là-dedans… Et quelle liberté, quelle <span class="vocab-term" onclick="openVocab('aisance')">aisance<i class="fa-solid fa-circle-info"></i></span> de facture ! Le papier peint à l’état d’ébauche est encore plus travaillé que ce marine-là !
+            </p>
+
+            <p class="mb-4">
+                J'essayais <span class="vocab-term" onclick="openVocab('en vain')">en vain<i class="fa-solid fa-circle-info"></i></span> de le calmer. Les critiques traditionnelles <span class="vocab-term" onclick="openVocab('abondait dans leur sens')">abondaient dans leur sens<i class="fa-solid fa-circle-info"></i></span> pour condamner cette extravagance. Les arguments des anciens maîtres semblaient devenus des discours <span class="vocab-term" onclick="openVocab('oiseux')">oiseux<i class="fa-solid fa-circle-info"></i></span> et des propos <span class="vocab-term" onclick="openVocab('niais')">niais<i class="fa-solid fa-circle-info"></i></span> face à cette folie. La ruine du bon goût semblait <span class="vocab-term" onclick="openVocab('imminente')">imminente<i class="fa-solid fa-circle-info"></i></span>.
+            </p>
+
+            <p class="mb-4">
+                Mais le père Vincent commençait à danser une sauvage <span class="vocab-term" onclick="openVocab('danse du scalp')">danse du scalp<i class="fa-solid fa-circle-info"></i></span> devant les toiles, en poussant des cris d’Iroquois. La raison du classique paysagiste avait définitivement sombré dans l'impressionnisme le plus pur !
+            </p>
+
+            <div class="mt-8 pt-4 border-t border-stone-400 font-editorial italic text-right">
+                — LOUIS LEROY.
+            </div>
+        </article>
+
+        <!-- Bas de page / Signature imprimé -->
+        <footer class="mt-12 pt-6 border-t-4 border-double border-stone-800 text-center text-xs text-stone-600 uppercase tracking-widest">
+            <p>Imprimerie du Charivari — Rue du Croissant 16, Paris — Tous droits réservés 1874</p>
+        </footer>
+    </main>
+
+    <!-- MODAL VOCABULAIRE / DEFINITION -->
+    <div id="vocab-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-[#f7f3e9] border-4 border-double border-amber-950 rounded-lg shadow-2xl max-w-lg w-full p-6 relative text-stone-900 transform scale-95 transition-transform duration-300" id="vocab-modal-content">
+            
+            <button onclick="closeVocabModal()" class="absolute top-3 right-3 text-stone-500 hover:text-stone-900 text-xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-stone-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 border-b-2 border-stone-800 pb-3 mb-4">
+                <div class="w-10 h-10 bg-amber-900 text-amber-100 rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-900">Dictionnaire Littéraire & Satirique (1874)</span>
+                    <h3 id="modal-term" class="font-headline text-2xl font-bold capitalize text-stone-900">Terme</h3>
+                </div>
+            </div>
+
+            <div class="my-4 font-serif leading-relaxed text-stone-800 text-base" id="modal-def">
+                Définition...
+            </div>
+
+            <div class="bg-amber-100/60 border-l-4 border-amber-800 p-3 rounded text-xs text-amber-950 font-editorial italic mt-4" id="modal-context">
+                Contexte dans le texte...
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeVocabModal()" class="bg-amber-900 hover:bg-amber-800 text-amber-50 font-bold px-4 py-2 rounded text-sm transition shadow">
+                    Fermer la définition
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LISTE DES 31 TERMES (INDEX GLOSSAIRE) -->
+    <div id="glossary-list-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-[#f7f3e9] border-4 border-double border-amber-950 rounded-lg shadow-2xl max-w-2xl w-full p-6 relative text-stone-900 max-h-[90vh] flex flex-col">
+            
+            <button onclick="toggleGlossaryModal()" class="absolute top-3 right-3 text-stone-500 hover:text-stone-900 text-xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-stone-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="border-b-2 border-stone-800 pb-3 mb-4">
+                <h3 class="font-headline text-2xl font-bold uppercase text-stone-900">Index des 31 Termes Annotés</h3>
+                <p class="text-xs text-stone-600 font-serif">Cliquez sur n'importe quel terme pour afficher son explication d'époque.</p>
+            </div>
+
+            <div class="overflow-y-auto pr-2 grid grid-cols-1 sm:grid-cols-2 gap-2 my-2 flex-grow" id="glossary-grid">
+                <!-- Rempli en JS -->
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-stone-300 flex justify-end">
+                <button onclick="toggleGlossaryModal()" class="bg-stone-800 text-white font-bold px-4 py-2 rounded text-sm hover:bg-stone-700 transition">
+                    Fermer l'index
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AGRANDISSEMENT TABLEAU -->
+    <div id="image-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300" onclick="closeImageModal()">
+        <div class="relative max-w-5xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-amber-400 text-2xl">
+                <i class="fa-solid fa-xmark"></i> Fermer
+            </button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg" 
+                 alt="Impression, soleil levant" 
+                 class="max-h-[80vh] w-auto border-4 border-amber-100 rounded shadow-2xl">
+            <div class="text-white text-center mt-3 font-serif">
+                <h4 class="font-headline text-xl text-amber-200">Claude Monet — Impression, soleil levant (1872)</h4>
+                <p class="text-xs text-stone-300 mt-1">L'œuvre historique présentée lors de la Première Exposition Impressionniste en 1874 à Paris.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dictionnaire exhaustif des 31 termes demandés
+        const dictionary = {
+            "boulevard": {
+                term: "Boulevard",
+                def: "Large voie urbaine bordée d'arbres. En 1874, le Boulevard des Capucines était le cœur de la vie moderne parisienne et le lieu de l'atelier du photographe Nadar où exposaient les impressionnistes.",
+                context: "« ...à l'exposition impressionniste du boulevard des Capucines. »"
+            },
+            "labouré": {
+                term: "Labouré",
+                def: "Fendument travaillée en sillons comme une terre agricole. Le critique utilise ironiquement une métaphore paysanne pour moquer la touche lourde de Pissarro.",
+                context: "« ...voilà qui est labouré de main de maître ! »"
+            },
+            "troublés": {
+                term: "Troublé",
+                def: "Perturbé, confus ou déconcerté dans sa perception esthétique par la rupture audacieuse de la nouvelle peinture.",
+                context: "« Mon esprit s'en trouve tout à fait troublé ! »"
+            },
+            "sillons": {
+                term: "Sillons",
+                def: "Traces profondes ou strie laissées par le pinceau ou le couteau à peindre dans une couche de peinture épaisse.",
+                context: "« Et ces sillons de peinture ? Ce badigeonnage de granit ? »"
+            },
+            "grattures de palette": {
+                term: "Grattures de palette",
+                def: "Restes de peinture séchée que l'artiste racle de sa palette au couteau. Le critique accuse le peintre d'appliquer ces déchets directement sur la toile.",
+                context: "« Mais ce sont des grattures de palette posées uniformément sur une toile sale. »"
+            },
+            "Ça n'a ni queue ni tête": {
+                term: "Ça n'a ni queue ni tête",
+                def: "Locution familière désignant une œuvre dépourvue de logique, d'ordre classique, d'orientation claire ou de sens intelligible.",
+                context: "« Ça n'a ni queue ni tête, ni haut ni bas, ni devant ni derrière ! »"
+            },
+            "gai": {
+                term: "Gai",
+                def: "Ici utilisé dans un sens ironique : un plaisantin ou un moqueur qui s'amuse aux dépens d'autrui.",
+                context: "« Vous êtes un gai plaisant !... »"
+            },
+            "commet": {
+                term: "Commet",
+                def: "Perpètre un acte blâmable. Présenté avec exagération dramatique comme un attentat aux règles académiques de la peinture.",
+                context: "« Ce tableau commet un crime contre la peinture classique. »"
+            },
+            "frottis": {
+                term: "Frottis",
+                def: "Technique picturale consistant à étaler une couche très mince de couleur en laissant deviner la sous-couche. Ici qualifié d'« informe » par le critique académique.",
+                context: "« ...ces empâtements grossiers, ces frottis informes... »"
+            },
+            "éclaboussures": {
+                term: "Éclaboussures",
+                def: "Taches de couleur projetées ou posées violemment sans le soin du rendu lisse prôné par l'Académie.",
+                context: "« ...ces éclaboussures d’un rouge écarlate ! »"
+            },
+            "s'est cabré": {
+                term: "S'est cabré",
+                def: "S'est redressé avec brusquerie sous le coup de la révolte ou du refus, comme un cheval effrayé.",
+                context: "« Le vieux peintre s'est cabré comme un cheval devant un obstacle. »"
+            },
+            "contraint": {
+                term: "Contraint",
+                def: "Forcé malgré soi d'affronter une réalité dérangeante qui bouscule les certitudes établies.",
+                context: "« Il se sentait contraint d'admettre la fin de ses convictions d'autrefois. »"
+            },
+            "déraisonnait": {
+                term: "Déraisonnait",
+                def: "Tombait dans le délire ou tenait des propos incohérents sous le choc de cette peinture non conventionnelle.",
+                context: "« Le pauvre homme déraisonnait complètement. »"
+            },
+            "avarie": {
+                term: "Avarie",
+                def: "Dommage subit par un navire ou une marchandise ; ici métaphore comique pour désigner la perte de contrôle mental du critique académique.",
+                context: "« La vue de ces toiles causait dans son cerveau une grave avarie. »"
+            },
+            "imprudence": {
+                term: "Imprudence",
+                def: "Manque de précaution. Le narrateur feint de regretter d'avoir exposé son ami trop fragile à une toile trop moderne.",
+                context: "« ...j’eus l’imprudence de le laisser trop longtemps devant le Boulevard des Capucines... »"
+            },
+            "ricana": {
+                term: "Ricana",
+                def: "Ria d'un rire moqueur, sardonique et hostile devant la témérité de l'artiste.",
+                context: "« — Ah ! ah ! ricana-t-il à la Méphisto... »"
+            },
+            "lichettes": {
+                term: "Lichettes",
+                def: "Petites touches de peinture rapides ou petites langues. Désigne ici les petites silhouettes noires esquissées par Monet pour figurer les passants.",
+                context: "« ...ce que représentent ces innombrables lichettes noires dans le bas du tableau ? »"
+            },
+            "sang et tonnerre": {
+                term: "Sang et tonnerre",
+                def: "Juron théâtral et suranné traduisant la colère bouillonnante du peintre conservateur.",
+                context: "« Sang et tonnerre ! Vous moquez-vous de moi à la fin ? »"
+            },
+            "badigeonnage": {
+                term: "Badigeonnage",
+                def: "Action d'appliquer de la peinture grossièrement, comme on enduit un mur de plâtre ou d'eau de chaux.",
+                context: "« Et ces sillons de peinture ? Ce badigeonnage de granit ? »"
+            },
+            "granit": {
+                term: "Granit",
+                def: "Roche très dure à l'aspect tacheté. Évoque ici une texture rocheuse, brute et sans la finesse du velouté académique.",
+                context: "« ...ce procédé que l’on emploie pour le badigeonnage des granits. »"
+            },
+            "inouï": {
+                term: "Inouï",
+                def: "Extraordinaire, fantastique, incroyable ou dépassant l'entendement habituel.",
+                context: "« Ses paysages sont un travail inouï ! »"
+            },
+            "effroyable": {
+                term: "Effroyable",
+                def: "Qui suscite l'effroi, l'épouvante ou une sainte horreur académique.",
+                context: "« Ô ciel ! s’écria-t-il, quelle horreur effroyable ! »"
+            },
+            "écarlate": {
+                term: "Écarlate",
+                def: "D'un rouge vif et éclatant, perçu comme agressif et strident par les yeux habitués aux tons rompus des salons officiels.",
+                context: "« ...des éclaboussures d’un rouge écarlate ! »"
+            },
+            "empâtements": {
+                term: "Empâtements",
+                def: "Couches épaisses de peinture laissées en relief sur la toile pour donner de la matière et de la lumière.",
+                context: "« ...ces empâtements grossiers, ces frottis informes... »"
+            },
+            "abondait dans leur sens": {
+                term: "Abondait dans leur sens",
+                def: "Allait tout à fait dans la direction de leurs opinions, renforçant les préjugés du public conservateur.",
+                context: "« Les critiques traditionnelles abondaient dans leur sens pour condamner cette extravagance. »"
+            },
+            "oiseux": {
+                term: "Oiseux",
+                def: "Inutile, vain, dénué d'intérêt réel ou d'effet sur la situation présente.",
+                context: "« Les arguments des anciens maîtres semblaient devenus des discours oiseux... »"
+            },
+            "niais": {
+                term: "Niais",
+                def: "Dépourvu de finesse, sot ou ridicules de simplicité.",
+                context: "« ...et des propos niais face à cette folie. »"
+            },
+            "imminente": {
+                term: "Imminente",
+                def: "Sur le point de se produire immédiatement. Évoque ici la terreur d'un effondrement des règles de l'art.",
+                context: "« La ruine du bon goût semblait imminente. »"
+            },
+            "aisance": {
+                term: "Aisance",
+                def: "Facilité apparente d'exécution (utilisé ici par leroy avec ironie pour dénoncer une négligence troublante).",
+                context: "« ...et quelle liberté, quelle aisance de facture ! »"
+            },
+            "en vain": {
+                term: "En vain",
+                def: "Inutilement, sans parvenir au résultat désiré.",
+                context: "« J'essayais en vain de le calmer. »"
+            },
+            "danse du scalp": {
+                term: "Danse du scalp",
+                def: "Danse rituelle des Amérindiens célébrant la victoire. Synonyme de gesticulation frénétique et sauvage provoquée par la folie de l'art moderne.",
+                context: "« ...commençait à danser une sauvage danse du scalp devant les toiles... »"
+            }
+        };
+
+        // Ouvrir le modal de définition
+        function openVocab(key) {
+            const data = dictionary[key];
+            if (!data) return;
+
+            document.getElementById('modal-term').innerText = data.term;
+            document.getElementById('modal-def').innerText = data.def;
+            document.getElementById('modal-context').innerText = data.context;
+
+            const modal = document.getElementById('vocab-modal');
+            const content = document.getElementById('vocab-modal-content');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        // Fermer le modal de définition
+        function closeVocabModal() {
+            const modal = document.getElementById('vocab-modal');
+            const content = document.getElementById('vocab-modal-content');
+
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Modal Index Glossaire
+        function toggleGlossaryModal() {
+            const modal = document.getElementById('glossary-list-modal');
+            if (modal.classList.contains('hidden')) {
+                // Populate grid if empty
+                const grid = document.getElementById('glossary-grid');
+                if (grid.children.length === 0) {
+                    Object.keys(dictionary).sort().forEach(key => {
+                        const item = dictionary[key];
+                        const btn = document.createElement('button');
+                        btn.className = "text-left p-2 rounded bg-amber-100/50 hover:bg-amber-800 hover:text-white transition text-xs font-serif border border-amber-200 flex justify-between items-center";
+                        btn.onclick = () => {
+                            toggleGlossaryModal();
+                            openVocab(key);
+                        };
+                        btn.innerHTML = `<span class="font-bold">${item.term}</span> <i class="fa-solid fa-arrow-right text-[10px] opacity-70"></i>`;
+                        grid.appendChild(btn);
+                    });
+                }
+
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        // Modal Image Zoom
+        function openImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Fermer les modals avec touche Echap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVocabModal();
+                closeImageModal();
+                document.getElementById('glossary-list-modal').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
